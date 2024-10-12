@@ -35,20 +35,21 @@ jobs:
           echo "PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_ENV
           echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
 
-      - name: Accept licenses
+      - name: Accept licenses and install build tools
         run: |
           export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
           yes | sdkmanager --licenses
-
-      - name: Install Build Tools and AIDL
-        run: |
-          export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-          sdkmanager "build-tools;30.0.3" "platform-tools" "platforms;android-30" "extras;android;m2repository" "extras;google;m2repository"
+          sdkmanager "build-tools;30.0.3" "platform-tools" "platforms;android-30"
 
       - name: Install Buildozer and dependencies
         run: |
           sudo apt install -y python3-pip git
           pip install buildozer cython opencv-python numpy
+
+      - name: Verify AIDL Installation
+        run: |
+          export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+          sdkmanager --list
 
       - name: Build APK
         run: |
