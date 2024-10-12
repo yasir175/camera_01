@@ -39,7 +39,8 @@ jobs:
         run: |
           export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
           yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+          sdkmanager "build-tools;30.0.3"  # Explicitly install the required version
+          sdkmanager "platform-tools" "platforms;android-30"
 
       - name: Install Buildozer and dependencies
         run: |
