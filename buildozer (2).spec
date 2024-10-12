@@ -5,7 +5,7 @@ package.domain = org.test
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-requirements = python3,kivy==2.1.0,numpy,pillow,requests,opencv-python
+requirements = python3,kivy==2.0.0,opencv==4.5.2,numpy
 orientation = portrait
 android.permissions = CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
 android.archs = arm64-v8a, armeabi-v7a
