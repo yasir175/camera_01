@@ -1,0 +1,37 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main  # Change to your main branch if different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Specify your Python version
+
+      - name: Install Buildozer and dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip git
+          pip install buildozer
+          sudo apt install -y openjdk-11-jdk  # Ensure Java is installed
+
+      - name: Build APK
+        run: |
+          cd your_project_directory  # Change to your project directory if needed
+          buildozer -v android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: myapp-debug.apk
+          path: your_project_directory/bin/*.apk  # Adjust if your APK is named differently
