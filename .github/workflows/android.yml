@@ -35,12 +35,15 @@ jobs:
           echo "PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_ENV
           echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
 
-      - name: Accept licenses and install build tools
+      - name: Accept licenses
         run: |
           export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
           yes | sdkmanager --licenses
-          sdkmanager "build-tools;30.0.3"  # Explicitly install the required version
-          sdkmanager "platform-tools" "platforms;android-30"
+
+      - name: Install Build Tools and AIDL
+        run: |
+          export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+          sdkmanager "build-tools;30.0.3" "platform-tools" "platforms;android-30" "extras;android;m2repository" "extras;google;m2repository"
 
       - name: Install Buildozer and dependencies
         run: |
