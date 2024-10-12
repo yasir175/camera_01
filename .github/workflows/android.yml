@@ -21,12 +21,14 @@ jobs:
 
       - name: Install Android SDK
         run: |
+          sudo apt update
           sudo apt install -y android-sdk
           echo "ANDROID_HOME=/usr/lib/android-sdk" >> $GITHUB_ENV
-          echo "PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools" >> $GITHUB_ENV
+          echo "PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools" >> $GITHUB_ENV
 
-      - name: Install Android Build Tools
+      - name: Install Android Command Line Tools
         run: |
+          sudo apt install -y android-sdk-commandlinetools
           yes | sdkmanager --licenses
           sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
 
