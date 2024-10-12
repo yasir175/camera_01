@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'  # Specify your Python version
+          python-version: '3.12.6'  # Specify your Python version
 
       - name: Install Buildozer and dependencies
         run: |
@@ -27,11 +27,11 @@ jobs:
 
       - name: Build APK
         run: |
-          cd your_project_directory  # Change to your project directory if needed
+          cd E:\experiment\opencv_camera  # Change to your project directory if needed
           buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
           name: myapp-debug.apk
-          path: your_project_directory/bin/*.apk  # Adjust if your APK is named differently
+          path: E:\experiment\opencv_camera/bin/*.apk  # Adjust if your APK is named differently
